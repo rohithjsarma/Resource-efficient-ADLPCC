@@ -1,4 +1,4 @@
-# Adaptive Deep Learning-based Point Cloud Coding (ADL-PCC)
+# Resource Efficient Adaptive Deep Learning-based Point Cloud Coding (ADL-PCC)
 
 This repository contains the implementation of the ADL-PCC codec - a Point Cloud geometry coding solution based on Deep Learning.
 
