@@ -58,37 +58,8 @@ SCALES_MIN = 0.11
 SCALES_MAX = 256
 SCALES_LEVELS = 64
 
-# tf.config.optimizer.set_jit(True)
-# os.environ['TF_ENABLE_AUTO_MIXED_PRECISION'] = '1'
 
 # function to load data sequentially
-def load_data(path):
-    print(path)
-    filename = tf.strings.as_string(path)
-    print(filename)
-    data = np.load(filename) # read compressed npy
-    return data_tensor
-
-def _set_shapes(data):
-    data.set_shape((64,64,64,1))
-    return data
-
-def placeholder_func(vox_data, b_size):
-    np.random.shuffle(vox_data)
-    train_data_placeholder = tf.placeholder(vox_data.dtype, vox_data.shape)
-    train_dataset = tf.data.Dataset.from_tensor_slices(train_data_placeholder)
-    train_dataset = train_dataset.shuffle(buffer_size=len(vox_data)).repeat()
-    train_dataset = train_dataset.batch(b_size)
-    train_dataset = train_dataset.prefetch(16)
-
-    return train_dataset, train_data_placeholder
-
-def read_npy_file(item):
-    data = np.load(item.decode())
-    data.set_shape((64,64,64,1))
-    print("************************************",data)
-    return data.astype(np.float32) 
-
 def tf_data_generator(d_path, file_list, i, batch_size = 4):
     if i%(np.floor(len(file_list)/batch_size)-1) == 0:
         if i == 0:
